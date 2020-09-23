@@ -1,15 +1,6 @@
 # vue-timer
 
-## Project setup
-```
-npm install
-```
-
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
-# ТЗ
+## ТЗ
 ```
 Создать страницу с таймерами.
 
@@ -20,3 +11,14 @@ npm run serve
 
 Кроме таймеров на странице должна быть кнопка, которая добавляет новый таймер в список.
 ```
+
+## Project setup
+```
+npm install
+```
+
+### Compiles and hot-reloads for development
+```
+npm run serve
+```
+
