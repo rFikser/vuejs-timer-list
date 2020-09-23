@@ -9,16 +9,14 @@ npm install
 ```
 npm run serve
 ```
+# ТЗ
+```
+Создать страницу с таймерами.
 
-### Compiles and minifies for production
-```
-npm run build
-```
+Каждый таймер должен иметь 3 функции:
+1. Запуск
+2. Пауза
+3. Сброс
 
-### Lints and fixes files
+Кроме таймеров на странице должна быть кнопка, которая добавляет новый таймер в список.
 ```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).

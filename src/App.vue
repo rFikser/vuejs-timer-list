@@ -1,28 +1,85 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js App" />
+    <TimerList
+      v-bind:timers="timers"
+      @start="start"
+      @pause="pause"
+      @stop="stop"
+      @add-timer="addTimer"
+    />
   </div>
 </template>
 
 <script>
-import HelloWorld from "./components/HelloWorld.vue";
+import TimerList from "@/components/TimerList";
+
+function randomInt(min, max) {
+  return Math.random() * (max - min) + min;
+}
 
 export default {
-  name: "App",
+  name: "app",
   components: {
-    HelloWorld
+    TimerList
+  },
+  data() {
+    return {
+      timers: [
+        {
+          id: 1,
+          paused: true,
+          ticker: undefined,
+          hours: 0,
+          minutes: 0,
+          seconds: 0,
+          timer: 0
+        }
+      ]
+    };
+  },
+  methods: {
+    start(id) {
+      let currentTimer = this.timers.find(item => item.id == id);
+      currentTimer.ticker = setInterval(() => {
+        let minutes = Math.floor(++currentTimer.timer / 60);
+        currentTimer.seconds = currentTimer.timer - minutes * 60;
+        currentTimer.hours = Math.floor(minutes / 60);
+        currentTimer.minutes = minutes - currentTimer.hours * 60;
+      }, 1000);
+      currentTimer.paused = false;
+    },
+    pause(id) {
+      let currentTimer = this.timers.find(item => item.id == id);
+      window.clearInterval(currentTimer.ticker);
+      currentTimer.paused = true;
+    },
+    stop(id) {
+      let currentTimer = this.timers.find(item => item.id == id);
+      window.clearInterval(currentTimer.ticker);
+      currentTimer.timer = 0;
+      currentTimer.paused = true;
+      currentTimer.seconds = 0;
+      currentTimer.minutes = 0;
+      currentTimer.hours = 0;
+    },
+    addTimer() {
+      let newTimer = {
+        id: randomInt(1, 10000),
+        paused: true,
+        ticker: undefined,
+        hours: 0,
+        minutes: 0,
+        seconds: 0,
+        timer: 0
+      };
+      this.timers.push(newTimer);
+    }
   }
 };
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+body {
+  background: #353638;
 }
 </style>
